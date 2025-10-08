@@ -123,7 +123,7 @@ function AppContent() {
             <img 
               src="/PTlogowhite.png" 
               alt="Port This Logo" 
-              className="h-14 w-auto"
+              className="h-16 w-auto"
             />
             <div>
               <h1 className="text-2xl font-bold text-black">DID Management Platform</h1>
