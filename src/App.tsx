@@ -118,12 +118,12 @@ function AppContent() {
 
       {/* Header */}
       <header className="border-b bg-black sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
             <img 
-              src="/PortThis-logosvg.svg" 
+              src="/PortThis-logo-cropped.svg" 
               alt="Port This Logo" 
-              className="h-30 w-auto"
+              className="h-8 w-auto"
             />
             <div>
               <h1 className="text-2xl font-bold text-white">DID Management Platform</h1>
