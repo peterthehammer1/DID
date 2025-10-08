@@ -119,10 +119,12 @@ function AppContent() {
       {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-3">
-            <div className="bg-primary text-primary-foreground p-2 rounded-lg">
-              <Phone className="h-6 w-6" />
-            </div>
+          <div className="flex items-center gap-4">
+            <img 
+              src="/logo.svg" 
+              alt="Port This Logo" 
+              className="h-10 w-auto"
+            />
             <div>
               <h1 className="text-2xl font-bold">DID Management Platform</h1>
               <p className="text-sm text-muted-foreground">
