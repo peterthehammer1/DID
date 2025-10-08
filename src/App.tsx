@@ -117,17 +117,17 @@ function AppContent() {
       <Toaster position="top-right" richColors />
 
       {/* Header */}
-      <header className="border-b bg-black sticky top-0 z-40">
+      <header className="border-b bg-white sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
             <img 
-              src="/PortThisBl - Logo.png" 
+              src="/PTlogowhite.png" 
               alt="Port This Logo" 
               className="h-12 w-auto"
             />
             <div>
-              <h1 className="text-2xl font-bold text-white">DID Management Platform</h1>
-              <p className="text-sm text-gray-300">
+              <h1 className="text-2xl font-bold text-black">DID Management Platform</h1>
+              <p className="text-sm text-gray-600">
                 Search, purchase, and manage your phone numbers
               </p>
             </div>
