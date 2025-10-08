@@ -41,7 +41,7 @@ export function NumberConfigDialog({
   onSave,
 }: NumberConfigDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit, watch, reset } = useForm<ConfigForm>({
+  const { register, handleSubmit, watch } = useForm<ConfigForm>({
     defaultValues: {
       friendlyName: number?.friendlyName || '',
       voiceEnabled: number?.voiceEnabled ?? true,
