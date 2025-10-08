@@ -121,7 +121,7 @@ function AppContent() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
             <img 
-              src="/logo.svg" 
+              src="/PortThis-logosvg.svg" 
               alt="Port This Logo" 
               className="h-10 w-auto"
             />
