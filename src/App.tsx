@@ -123,7 +123,13 @@ function AppContent() {
             <img 
               src="/PortThis-logosvg.svg" 
               alt="Port This Logo" 
-              className="h-20 w-auto"
+              className="h-30 w-auto"
+              style={{
+                objectFit: 'contain',
+                objectPosition: 'center',
+                transform: 'scale(1.2)',
+                transformOrigin: 'center'
+              }}
             />
             <div>
               <h1 className="text-2xl font-bold text-white">DID Management Platform</h1>
