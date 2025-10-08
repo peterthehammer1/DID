@@ -126,7 +126,6 @@ function AppContent() {
               className="h-16 w-auto"
             />
             <div>
-              <h1 className="text-2xl font-bold text-black">DID Management Platform</h1>
               <p className="text-sm text-gray-600">
                 Search, purchase, and manage your phone numbers
               </p>
