@@ -123,7 +123,7 @@ function AppContent() {
             <img 
               src="/PortThis-logosvg.svg" 
               alt="Port This Logo" 
-              className="h-12 w-auto"
+              className="h-full w-auto"
             />
             <div>
               <h1 className="text-2xl font-bold text-white">DID Management Platform</h1>
