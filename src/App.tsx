@@ -123,10 +123,9 @@ function AppContent() {
             <img 
               src="/PortThis-logosvg.svg" 
               alt="Port This Logo" 
-              className="h-8 w-auto object-contain"
+              className="h-full w-auto object-contain"
               style={{
-                objectPosition: 'center',
-                maxWidth: '120px'
+                objectPosition: 'center'
               }}
             />
             <div>
