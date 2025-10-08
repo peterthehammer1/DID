@@ -121,9 +121,9 @@ function AppContent() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-4">
             <img 
-              src="/PortThis-logosvg.svg" 
+              src="/PortThisBl - Logo.png" 
               alt="Port This Logo" 
-              className="h-full w-auto"
+              className="h-12 w-auto"
             />
             <div>
               <h1 className="text-2xl font-bold text-white">DID Management Platform</h1>
