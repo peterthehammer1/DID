@@ -20,7 +20,25 @@ export const phoneNumberApi = {
     if (filters.numberType) params.append('type', filters.numberType);
     
     const response = await api.get(`/dids/search?${params.toString()}`);
-    return response.data;
+    
+    // Transform API response to match frontend interface
+    return response.data.map((item: any) => ({
+      id: item.id.toString(),
+      phoneNumber: item.phone_number,
+      friendlyNumber: item.phone_number.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3'),
+      country: item.country,
+      region: item.province_state,
+      city: item.city,
+      areaCode: item.phone_number.substring(0, 3),
+      capabilities: {
+        voice: true,
+        sms: true,
+        mms: false,
+      },
+      monthlyPrice: parseFloat(item.monthly_fee),
+      currency: 'CAD',
+      numberType: 'local' as const,
+    }));
   },
 
   // Provision new DID
@@ -35,7 +53,36 @@ export const phoneNumberApi = {
   // Get customer's DIDs
   getOwned: async (): Promise<OwnedPhoneNumber[]> => {
     const response = await api.get('/dids');
-    return response.data;
+    
+    // Transform API response to match frontend interface
+    return response.data.map((item: any) => ({
+      id: item.id.toString(),
+      phoneNumber: item.phone_number,
+      friendlyNumber: item.phone_number.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3'),
+      country: item.country,
+      region: item.province_state,
+      city: item.city,
+      areaCode: item.phone_number.substring(0, 3),
+      capabilities: {
+        voice: true,
+        sms: true,
+        mms: false,
+      },
+      monthlyPrice: parseFloat(item.monthly_fee),
+      currency: 'CAD',
+      numberType: 'local' as const,
+      friendlyName: item.description,
+      voiceEnabled: true,
+      smsEnabled: true,
+      voiceConfig: {
+        forwardToWebhook: item.retell_agent_id ? `agent_${item.retell_agent_id}` : undefined,
+        voicemailEnabled: false,
+      },
+      smsConfig: {
+        autoReplyEnabled: false,
+      },
+      purchasedAt: item.created_at,
+    }));
   },
 
   // Update DID configuration
