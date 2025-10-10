@@ -2,7 +2,7 @@ import axios from 'axios';
 import { PhoneNumber, OwnedPhoneNumber, SearchFilters, VoiceConfig, SmsConfig } from '@/types/phone-number';
 
 const api = axios.create({
-  baseURL: 'https://portthis.com/api',
+  baseURL: '/api', // Use relative path for same domain
   headers: {
     'Content-Type': 'application/json',
   },
