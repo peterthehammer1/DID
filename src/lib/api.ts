@@ -44,10 +44,45 @@ export const phoneNumberApi = {
   // Provision new DID
   purchase: async (numberId: string): Promise<OwnedPhoneNumber> => {
     const response = await api.post('/dids', { 
-      number: numberId,
-      customer_id: 'default', // You may need to handle customer selection
+      phone_number: numberId,
+      customer_id: 1, // Default test customer
+      retell_agent_id: 'agent_0cfd3019a03f3f2e7a1e18c867', // Default agent
+      description: `Port This DID - ${numberId}`,
+      city: 'Vancouver',
+      province_state: 'BC',
+      country: 'Canada'
     });
-    return response.data;
+    
+    // Transform the response to match frontend interface
+    const item = response.data.did || response.data;
+    return {
+      id: item.id.toString(),
+      phoneNumber: item.phone_number,
+      friendlyNumber: item.phone_number.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3'),
+      country: item.country,
+      region: item.province_state,
+      city: item.city,
+      areaCode: item.phone_number.substring(0, 3),
+      capabilities: {
+        voice: true,
+        sms: true,
+        mms: false,
+      },
+      monthlyPrice: parseFloat(item.monthly_fee),
+      currency: 'CAD',
+      numberType: 'local' as const,
+      friendlyName: item.description,
+      voiceEnabled: true,
+      smsEnabled: true,
+      voiceConfig: {
+        forwardToWebhook: item.retell_agent_id ? `agent_${item.retell_agent_id}` : undefined,
+        voicemailEnabled: false,
+      },
+      smsConfig: {
+        autoReplyEnabled: false,
+      },
+      purchasedAt: item.created_at,
+    };
   },
 
   // Get customer's DIDs
