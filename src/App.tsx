@@ -7,7 +7,7 @@ import { NumberSearchResults } from '@/components/NumberSearchResults';
 import { NumberConfigDialog } from '@/components/NumberConfigDialog';
 import { OwnedNumbersDashboard } from '@/components/OwnedNumbersDashboard';
 import { PhoneNumber, OwnedPhoneNumber, SearchFilters } from '@/types/phone-number';
-import { mockPhoneNumberApi as phoneNumberApi } from '@/lib/mock-api';
+import { phoneNumberApi } from '@/lib/api';
 import { Phone } from 'lucide-react';
 
 const queryClient = new QueryClient({
