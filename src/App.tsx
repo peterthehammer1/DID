@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { QueryClient, QueryClientProvider, useMutation, useQuery } from '@tanstack/react-query';
 import { Toaster, toast } from 'sonner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -8,7 +8,7 @@ import { NumberConfigDialog } from '@/components/NumberConfigDialog';
 import { OwnedNumbersDashboard } from '@/components/OwnedNumbersDashboard';
 import { PhoneNumber, OwnedPhoneNumber, SearchFilters } from '@/types/phone-number';
 import { phoneNumberApi } from '@/lib/api';
-import { Phone } from 'lucide-react';
+import { Phone, Wifi, WifiOff } from 'lucide-react';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,6 +24,7 @@ function AppContent() {
   const [selectedNumber, setSelectedNumber] = useState<OwnedPhoneNumber | null>(null);
   const [configDialogOpen, setConfigDialogOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('search');
+  const [systemStatus, setSystemStatus] = useState<'loading' | 'online' | 'offline'>('loading');
 
   // Search available numbers
   const {
@@ -45,6 +46,28 @@ function AppContent() {
     queryKey: ['numbers', 'owned'],
     queryFn: phoneNumberApi.getOwned,
   });
+
+  // System health check
+  const {
+    data: healthStatus,
+    isLoading: isHealthLoading,
+    isError: isHealthError,
+  } = useQuery({
+    queryKey: ['health'],
+    queryFn: phoneNumberApi.health,
+    refetchInterval: 30000, // Check every 30 seconds
+  });
+
+  // Update system status based on health check
+  React.useEffect(() => {
+    if (isHealthLoading) {
+      setSystemStatus('loading');
+    } else if (isHealthError) {
+      setSystemStatus('offline');
+    } else if (healthStatus) {
+      setSystemStatus('online');
+    }
+  }, [healthStatus, isHealthLoading, isHealthError]);
 
   // Purchase number mutation
   const purchaseMutation = useMutation({
@@ -119,16 +142,40 @@ function AppContent() {
       {/* Header */}
       <header className="border-b bg-white sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
-            <img 
-              src="/PTlogowhite.png" 
-              alt="Port This Logo" 
-              className="h-16 w-auto"
-            />
-            <div>
-              <p className="text-sm text-gray-600">
-                Search, purchase, and manage your phone numbers
-              </p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <img 
+                src="/PTlogowhite.png" 
+                alt="Port This Logo" 
+                className="h-16 w-auto"
+              />
+              <div>
+                <p className="text-sm text-gray-600">
+                  Search, purchase, and manage your phone numbers
+                </p>
+              </div>
+            </div>
+            
+            {/* System Status */}
+            <div className="flex items-center gap-2">
+              {systemStatus === 'loading' && (
+                <div className="flex items-center gap-2 text-gray-500">
+                  <div className="animate-spin h-4 w-4 border-2 border-gray-300 border-t-gray-600 rounded-full"></div>
+                  <span className="text-sm">Checking system...</span>
+                </div>
+              )}
+              {systemStatus === 'online' && (
+                <div className="flex items-center gap-2 text-green-600">
+                  <Wifi className="h-4 w-4" />
+                  <span className="text-sm">System Online</span>
+                </div>
+              )}
+              {systemStatus === 'offline' && (
+                <div className="flex items-center gap-2 text-red-600">
+                  <WifiOff className="h-4 w-4" />
+                  <span className="text-sm">System Offline</span>
+                </div>
+              )}
             </div>
           </div>
         </div>

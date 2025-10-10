@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search } from 'lucide-react';
+import { Search, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -117,6 +117,15 @@ export function NumberSearchFilters({ onSearch, isLoading }: NumberSearchFilters
         </Button>
         <Button variant="outline" onClick={handleReset} disabled={isLoading}>
           Reset Filters
+        </Button>
+        <Button 
+          variant="secondary" 
+          onClick={() => onSearch({ pattern: '778' })} 
+          disabled={isLoading}
+          className="gap-2"
+        >
+          <Phone className="h-4 w-4" />
+          Test API
         </Button>
       </div>
     </div>

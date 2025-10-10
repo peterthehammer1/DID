@@ -1,6 +1,6 @@
 import { PhoneNumberCard } from './PhoneNumberCard';
 import { PhoneNumber } from '@/types/phone-number';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Phone } from 'lucide-react';
 
 interface NumberSearchResultsProps {
   numbers: PhoneNumber[];
@@ -24,9 +24,14 @@ export function NumberSearchResults({
   if (numbers.length === 0) {
     return (
       <div className="text-center py-12 bg-card border rounded-lg">
-        <p className="text-muted-foreground">
-          No phone numbers found. Try adjusting your search filters.
+        <Phone className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+        <p className="text-lg font-semibold mb-2">No phone numbers found</p>
+        <p className="text-muted-foreground mb-4">
+          Try adjusting your search filters or contact support for more options.
         </p>
+        <div className="text-sm text-muted-foreground">
+          <p>Test DID available: <span className="font-mono font-semibold">778-244-0105</span></p>
+        </div>
       </div>
     );
   }
