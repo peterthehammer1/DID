@@ -5,6 +5,7 @@ const api = axios.create({
   baseURL: '/api', // Use relative path for same domain
   headers: {
     'Content-Type': 'application/json',
+    'Authorization': 'Bearer 4926e2926a2fc93e3eccc679b0ef37dd34d7e57e72658376345f6506f11e6cf1',
   },
 });
 
